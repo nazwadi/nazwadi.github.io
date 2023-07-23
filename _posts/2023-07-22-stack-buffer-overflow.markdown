@@ -3,7 +3,8 @@ layout: post
 title:  "Stack Buffer Overflow"
 date:   2023-07-22 21:57:06 -0400
 categories: security
-tags: stack
+tags: stack buffer
+pin: true
 ---
 ## Stack buffer overflow
 
@@ -28,7 +29,7 @@ On x86 (32-bit) architecture using `cdecl` and `stdcall` calling conventions, we
 Specifics on calling conventions, use of registers, and stack frame organization can be found in the [System V Application Binary Interface Intel386 Architecture Processor Supplement](https://www.sco.com/developers/devspecs/abi386-4.pdf).
 
 #### x86-64 (64-bit Intel)
-On x86_64 architecture, the change most relevant to this discussion is that function parameters are no longer pushed on the stack for the first six parameters but rather stored in general-purpose registers (`%rdi`, `%rsi`, `%rdx`, `%rcx`, `%r8`, `%r9` in that order) for non-floating point values.  Floating point parameter values will be stored in `%xmm0` - `%xmm7`.  If there are more than six parameters, the additional parameters are pushed onto the stack in _reversed (right-to-left)_ (i.e. last parameter first).
+On x86-64 architecture, the change most relevant to this discussion is that function parameters are no longer pushed on the stack for the first six parameters but rather stored in general-purpose registers (`%rdi`, `%rsi`, `%rdx`, `%rcx`, `%r8`, `%r9` in that order) for non-floating point values.  Floating point parameter values will be stored in `%xmm0` - `%xmm7`.  If there are more than six parameters, the additional parameters are pushed onto the stack in _reversed (right-to-left)_ (i.e. last parameter first).
 
 Specifics on calling conventions, use of registers, and stack frame organization can be found in the [System V Application Binary Interface (ABI) x86-64](https://www.intel.com/content/dam/develop/external/us/en/documents/mpx-linux64-abi.pdf).
 
@@ -54,7 +55,7 @@ void main() {
 
 The stack is either implemented growing down (towards lower memory addresses), or growing up (towards higher memory addresses).  On Intel, Motorola, MIPS, and SPARC architectures the stack grows down. A typical function call might look like the following (using Intel x86 asm format):
 
-```asm
+```nasm
 push ESP              // Save the stack pointer of the calling stack frame
 push dword [EBP+20]   // Save the value at this address as the second function parameter
 push 3                // Save the integer 3 as the first function parameter
