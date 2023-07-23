@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-#gem "jekyll", "~> 4.3.2"
-gem "github-pages", "~> 228", group: :jekyll_plugins
+
+gem "jekyll-theme-chirpy", "~> 6.1"
+
+group :test do
+  gem "html-proofer", "~> 3.18"
+end
+
+#gem "github-pages", "~> 228", group: :jekyll_plugins
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.5"
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
@@ -33,6 +33,12 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
-gem "jekyll", "~> 3.9"
+gem "jekyll", "~> 4.3.2"
+#gem "jekyll", "~> 3.9" # Needed for Github-Pages 228
 
 gem "webrick", "~> 1.8"
+
+# Lock jekyll-sass-converter to 2.x on Linux-musl
+if RUBY_PLATFORM =~ /linux-musl/
+  gem "jekyll-sass-converter", "~> 2.0"
+end
