@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "Stack Buffer Overflow"
+date:   2023-07-22 21:57:06 -0400
+categories: stack buffer
+---
 ## Stack buffer overflow
 
 ### Definition
